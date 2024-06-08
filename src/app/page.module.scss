@@ -1,0 +1,42 @@
+.hero {
+  padding: 100px 0;
+  position: relative;
+  color: #fff;
+  margin-bottom: 32px;
+
+  @media screen and (max-width: 767px) {
+    padding: 74px 0;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__contain {
+    position: relative;
+  }
+
+  &__content {
+    max-width: 470px;
+
+    @media screen and (max-width: 767px) {
+      max-width: 270px;
+    }
+  }
+
+  &__mainTitle {
+    font-size: clamp(38px, 10vw, 54px);
+    font-weight: 700;
+    margin: 0 0 24px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: clamp(40px, 2.4vw, 32px);
+  }
+}

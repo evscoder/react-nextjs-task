@@ -1,0 +1,31 @@
+.header {
+  height: 88px;
+  display: flex;
+  align-self: center;
+  background-color: #000000;
+  color: #fff;
+
+  @media screen and (max-width: 767px) {
+    height: 80px;
+  }
+
+  &__Row {
+    flex-grow: 1;
+    gap: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+  }
+
+  &__btnRight {
+    height: 48px;
+    padding: 4px 32px;
+  }
+}
+
+.logo {
+  @media screen and (max-width: 767px) {
+    width: 106px;
+    height: 36px;
+  }
+}

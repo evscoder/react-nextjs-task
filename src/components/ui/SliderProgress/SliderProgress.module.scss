@@ -1,0 +1,12 @@
+.sliderProgress {
+  background-color: rgba(0,0,0, 0.3);
+  height: 2px;
+  margin-bottom: 32px;
+
+  :global(.swiper-pagination-progressbar-fill) {
+    height: 100%;
+    display: block;
+    background-color: var(--red);
+    transform-origin: 0 50%;
+  }
+}

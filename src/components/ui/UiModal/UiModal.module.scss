@@ -1,0 +1,170 @@
+.modal {
+  --modal-container-gutter: 80px;
+  --modal-width: 640px;
+  --modal-background-color: var(--white);
+  --modal-body-p: 40px 0 0;
+  --box-shadow: 0 4px 8px rgba(169, 194, 209, 0.25), 0 16px 32px rgba(169, 194, 209, 0.25);
+  --modal-backdrop-color: var(--backdrop-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed!important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  color: var(--black);
+
+  @media screen and (max-width: 767px) {
+    --modal-container-gutter: 15px;
+  }
+
+  &:global([data-simplebar]) {
+    overflow: initial;
+
+    >  :global(.simplebar-wrapper > .simplebar-mask > .simplebar-offset > .simplebar-content-wrapper) {
+      display: flex;
+
+      >  :global(.simplebar-content) {
+        flex-grow: 1;
+        margin: auto;
+      }
+    }
+  }
+
+  &.is-active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.is-animate {
+    pointer-events: all;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-backdrop-color);
+    opacity: 0;
+    transition: var(--t-base);
+
+    .modal.is-animate & {
+      opacity: var(--backdrop-opacity);
+    }
+  }
+
+  &__close {
+    position: sticky;
+    margin: 32px 32px 0 auto;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    transition: var(--t-base);
+    padding: 8px;
+
+    @media screen and (max-width: 767px) {
+      right: 15px;
+    }
+
+    svg[class*="icon"] {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+    }
+  }
+
+  &__wrap {
+    position: relative;
+    width: 0;
+    pointer-events: none;
+    overflow: hidden;
+    max-width: var(--modal-width);
+    margin: auto;
+
+    .modal.is-active & {
+      width: 100%;
+      overflow: initial;
+    }
+  }
+
+  &__window {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-height: 100%;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+
+    .modal.is-animate & {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: all;
+    background-color: var(--modal-background-color);
+    padding-bottom: 30px;
+    margin: 10px auto;
+    max-width: calc(100% - 20px);
+    box-shadow: var(--box-shadow);
+
+    @media screen and (max-width: 767px) {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+  }
+
+  &__content-wrap {
+    flex-grow: 1;
+  }
+
+  &__container {
+    padding-right: var(--modal-container-gutter);
+    padding-left: var(--modal-container-gutter);
+  }
+
+  &__header {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  &__body {
+    flex-grow: 1;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--modal-body-p);
+  }
+
+  &__footer {
+    padding-top: 20px;
+
+    @media screen and (max-width: 767px) {
+      padding-top: 15px;
+    }
+  }
+}

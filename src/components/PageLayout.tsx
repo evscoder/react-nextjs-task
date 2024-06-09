@@ -25,6 +25,7 @@ const PageLayout: FC<Props> = ({ header, footer, children }) => {
                 </main>
                 {footer}
             </div>
+            <div id={'portals'}></div>
         </Provider>
     );
 };

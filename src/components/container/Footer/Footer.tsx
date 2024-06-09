@@ -1,10 +1,23 @@
-import React from 'react';
+'use client';
+
+import React, {useCallback, useState} from 'react';
 import ImagePath from "@/helper/imagePath";
 import Icon from "@/components/ui/Icon/Icon";
 import Link from "next/link";
 import s from './Footer.module.scss';
+import PolicyModal from "@/components/container/PolicyModal/PolicyModal";
 
 const Footer = () => {
+    const [show, setShow] = useState(false);
+
+    const onTogglePolicy = useCallback(() => {
+        setShow(true);
+    }, []);
+
+    const onClosePolicy = useCallback(() => {
+       setShow(false);
+    }, []);
+
     return (
         <footer className={s.footer}>
             <div className="container">
@@ -12,9 +25,9 @@ const Footer = () => {
                     <Link href={'#'}>
                         <img src={ImagePath('logo.svg')} alt="#"/>
                     </Link>
-                    <Link href="#" className={s.copyRight}>
+                    <button onClick={onTogglePolicy} className={s.copyRight} role={'button'}>
                         Политика обработки <br /> персональных данных
-                    </Link>
+                    </button>
                     <div className={s.socialLinks}>
                         <a className={s.socialLinks__item}>
                             <Icon name={'icon-instagram'} width={32} />
@@ -28,6 +41,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+            <PolicyModal isShow={show} setClose={onClosePolicy} />
         </footer>
     );
 };

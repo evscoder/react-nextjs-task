@@ -1,0 +1,43 @@
+.input-file {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-left: auto;
+
+  &__input {
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  &__text {
+    margin: 0 12px 0 0;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--black);
+
+    &--error {
+      color: var(--red);
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid var(--black);
+    cursor: pointer;
+    transition: opacity var(--t-base);
+
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

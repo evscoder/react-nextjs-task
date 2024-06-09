@@ -1,0 +1,22 @@
+.frame {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &--top {
+    grid-row: 1 / -1;
+    grid-column: span 2;
+  }
+}

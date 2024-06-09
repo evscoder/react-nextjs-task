@@ -17,19 +17,3 @@
 .card {
   width: fit-content!important;
 }
-
-.arrow {
-  display: grid;
-  padding: 0 7px;
-  align-items: center;
-  color: var(--red);
-
-  &:first-of-type {
-    margin-left: auto;
-  }
-
-  &:global(.swiper-button-disabled) {
-    color: inherit;
-    opacity: 0.4;
-  }
-}

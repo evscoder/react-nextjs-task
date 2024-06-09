@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cardsSlice from "@/redux/cardsSlice";
+import framesSlice from "@/redux/framesSlice";
 
 export const store = configureStore({
     reducer: {
-        cardsSlice
+        cardsSlice,
+        framesSlice
     }
 });
 

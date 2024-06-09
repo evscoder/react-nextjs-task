@@ -1,0 +1,18 @@
+.sectionMap {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0!important;
+
+  > div {
+    width: 100%!important;
+    height: 400px!important;
+
+    > * {
+      width: 100%!important;
+    }
+
+    :global([class*=ground-pane]) {
+      filter: grayscale(1) contrast(100%) brightness(84%);
+    }
+  }
+}

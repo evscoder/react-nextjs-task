@@ -5,10 +5,13 @@ import PageLayout from "@/components/PageLayout";
 import UiButton from "@/components/ui/UiButton/UiButton";
 import Cards from "@/components/container/Cards/Cards";
 import Header from "@/components/container/Header/Header";
+import Frames from "@/components/container/Frames/Frames";
+import SectionMap from "@/components/container/SectionMap/SectionMap";
+import Footer from "@/components/container/Footer/Footer";
 
 export default function Home() {
   return (
-    <PageLayout header={<Header />}>
+    <PageLayout header={<Header />} footer={<Footer />}>
         <div className={s.hero}>
             <picture>
                 <source srcSet={imagePath('a-mobile.jpg')} media={'(max-width: 767px)'} />
@@ -30,6 +33,8 @@ export default function Home() {
             </div>
         </div>
         <Cards />
+        <Frames />
+        <SectionMap />
     </PageLayout>
   );
 }

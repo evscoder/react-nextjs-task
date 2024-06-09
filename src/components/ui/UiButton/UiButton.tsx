@@ -14,11 +14,12 @@ export interface ButtonProps {
     onClick?: MouseEventHandler<HTMLButtonElement> | ChangeEvent<HTMLButtonElement> | undefined | any,
     children?: React.ReactNode,
     color: Colors,
+    block?: boolean
     classNames?: string,
 }
 
-const UiButton = forwardRef<HTMLButtonElement, ButtonProps>(({link, id, outline, children, color, classNames, ...props }, ref) => {
-    const buttonClasses = cn(s.button, color && s[`button--${color}`], outline && s[`button--outline`], classNames);
+const UiButton = forwardRef<HTMLButtonElement, ButtonProps>(({link, id, outline, children, color, block, classNames, ...props }, ref) => {
+    const buttonClasses = cn(s.button, color && s[`button--${color}`], outline && s[`button--outline`], block && s[`button--block`], classNames);
 
     return (
         link ?

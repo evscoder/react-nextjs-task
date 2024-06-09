@@ -1,7 +1,7 @@
 import {productionPath} from '../root/paths';
 
 const imagePath = (pathName: string) => {
-    const fullPath = process.env.NODE_ENV === 'production' ? `/${productionPath}/img/` : `/img/`;
+    const fullPath = process.env.NODE_ENV === 'production' ? `/img/` : `/img/`;
 
     return fullPath + pathName;
 };

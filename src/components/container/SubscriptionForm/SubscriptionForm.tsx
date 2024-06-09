@@ -10,8 +10,8 @@ const InputError = withFieldError(UiInput);
 const SubscriptionForm = () => {
     return (
         <form action="#">
-            <div className={'grid-cols-12'}>
-                <div className={'grid-span-12'}>
+            <div className={'grid grid-cols-12 gap-x-6 gap-y-8'}>
+                <div className={'col-span-12'}>
                     <InputError
                         type={'text'}
                         hasError={'Поле не заполненно'}
@@ -20,7 +20,7 @@ const SubscriptionForm = () => {
                         required={true}
                     />
                 </div>
-                <div className={'grid-span-6'}>
+                <div className={'col-span-12 sm:col-span-6'}>
                     <InputError
                         type={'email'}
                         hasError={'Поле не заполненно'}
@@ -29,18 +29,18 @@ const SubscriptionForm = () => {
                         required={true}
                     />
                 </div>
-                <div className={'grid-span-6'}>
+                <div className={'col-span-12 sm:col-span-6'}>
                     <InputPhone
                         placeholder={'+7 (___) __-__-___'}
                     />
                 </div>
-                <div className={'grid-span-12'}>
+                <div className={'col-span-12'}>
                     <UiTextarea
                         placeholder={'Оставьте пометку к заказу'}
                         name={'User_Text'}>
                     </UiTextarea>
                 </div>
-                <div className={'grid-span-12'}>
+                <div className={'col-span-12'}>
                     <UiInputFile
                         id={'InputFile'}
                         name={'User_Files'}
@@ -48,7 +48,7 @@ const SubscriptionForm = () => {
                     />
                 </div>
             </div>
-            <div className={'grid-span-12'}>
+            <div className={'col-span-12'}>
                 <UiCheckbox id={'agree'} name={'User_Agree'}>
                     Даю согласие на обработку своих персональных данных
                 </UiCheckbox>

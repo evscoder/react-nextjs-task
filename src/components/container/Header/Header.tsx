@@ -17,7 +17,7 @@ const Header: React.FC<Props> = ({ secondary }) => {
                         <img className={s.logoImage} src={imagePath('logo.svg')} width={'130px'} height={'44px'} alt=""/>
                     </a>
                     {!secondary &&
-                        <UiButton color={'red'} outline={true} link={true} href={'#'} classNames={s.header__btnRight}>
+                        <UiButton color={'red'} outline={true} link={true} href={'/subscription'} classNames={s.header__btnRight}>
                             Подключить подписку
                         </UiButton>
                     }

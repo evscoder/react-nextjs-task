@@ -1,31 +1,21 @@
 .input {
   -webkit-appearance: none;
-  border: none;
   border-radius: 0;
   box-shadow: none;
   outline: none;
-  background-color: transparent;
   display: block;
+  height: calc(var(--control-height) * 1px);
   width: 100%;
+  padding: 4px 20px;
+  border: 1px solid transparent;
   font-size: 16px;
   line-height: 22px;
-  font-weight: 700;
-  color: var(--black);
-  border-bottom: 1px solid var(--black);
+  background-color: var(--white-a10);
+  color: var(--white);
 
   &::placeholder  {
     font-weight: 400;
     color: var(--gray);
-  }
-
-  &:focus {
-    border-color: var(--primary-color);
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      border-color: var(--primary-color);
-    }
   }
 
   &.error  {

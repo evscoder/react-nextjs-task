@@ -3,9 +3,11 @@
   --black-a40: rgba(0, 0, 0, 0.4);
   --gray: #626263;
   --white: #ffffff;
+  --white-a10: rgba(255, 255, 255, 0.10);
   --blue: #278AFE;
   --red: #EC3F3F;
   --red-a15: rgba(236, 63, 63, 0.15);
+  --red-a20: rgba(236, 63, 63, 0.20);
   --red-a80: rgba(236, 63, 63, 0.80);
   --red2: #FF1E1E;
 
@@ -27,6 +29,7 @@
   --base-container-width: 1200;
   --container-gutter: 15px;
   --container-width: calc(var(--base-container-width) * 1px + var(--container-gutter) * 2);
+  --control-height: 56;
 
   --backdrop-opacity: 0.5;
   --backdrop-color: var(--black-a40);

@@ -1,7 +1,7 @@
 'use client';
 
 import React, {FC, useState} from 'react';
-import styles from './UiCheckbox.module.scss';
+import s from './UiCheckbox.module.scss';
 import cn from 'clsx';
 
 export interface CheckboxProps {
@@ -12,30 +12,27 @@ export interface CheckboxProps {
     disabled?: boolean
     isChecked?: boolean,
     children: React.ReactNode,
-    type?: 'alt' | 'circle'
-    color?: 'primary' | 'light',
-    size?: 'small',
     className?: string
 }
 
-const UiCheckbox: FC<CheckboxProps> = ({ color, type, size, id, name, value, required, disabled, isChecked, children, className }) => {
+const UiCheckbox: FC<CheckboxProps> = ({ isChecked, children, className,...props }) => {
     const [checked, setChecked] = useState(!!isChecked);
     const onChange = () => setChecked(!checked);
 
     return (
-        <div className={cn(styles['checkbox'], styles[`checkbox--${type}`], styles[`checkbox--${size}`], styles[`checkbox--${color}`], className)}>
+        <div className={cn(s.checkbox, className)}>
             <input
-                className={styles['checkbox__input']}
-                id={id}
+                className={s.checkbox__input}
+                id={props.id}
                 type={'checkbox'}
-                name={name}
-                value={value && ''}
-                required={required}
-                disabled={disabled}
+                name={props.name}
+                value={props.value && ''}
+                required={props.required}
+                disabled={props.disabled}
                 checked={checked}
                 onChange={onChange}
             />
-            <label htmlFor={id} className={styles['checkbox__label']}>{ children }</label>
+            <label htmlFor={props.id} className={s.checkbox__label}>{ children }</label>
         </div>
     );
 };

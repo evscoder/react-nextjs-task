@@ -16,6 +16,7 @@ export interface ButtonProps {
     color: Colors,
     block?: boolean
     classNames?: string,
+    type?: 'submit' | 'button'
 }
 
 const UiButton = forwardRef<HTMLButtonElement, ButtonProps>(({link, id, outline, children, color, block, classNames, ...props }, ref) => {
@@ -23,10 +24,10 @@ const UiButton = forwardRef<HTMLButtonElement, ButtonProps>(({link, id, outline,
 
     return (
         link ?
-            <Link {...props} href={props.href as string} className={buttonClasses}>
+            <Link {...props} href={props.href as string} className={buttonClasses} role={props.type}>
                 { children }
             </Link> :
-            <button {...props} ref={ref} id={id} data-testid={id} className={buttonClasses}>
+            <button {...props} ref={ref} id={id} data-testid={id} className={buttonClasses} type={props.type}>
                 { children }
             </button>
     );

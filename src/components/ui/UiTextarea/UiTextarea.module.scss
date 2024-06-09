@@ -1,0 +1,38 @@
+.textarea {
+  position: relative;
+
+  &__input {
+    -webkit-appearance: none;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    background-color: transparent;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 6px;
+    border: 1px solid var(--gray);
+    font-size: 16px;
+    line-height: 1.4;
+    resize: none;
+
+    &::placeholder  {
+      font-weight: 400;
+      color: var(--gray);
+    }
+
+    &:focus {
+      border-color: var(--primary-color);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--primary-color);
+      }
+    }
+
+    &.error  {
+      color: var(--red) !important;
+    }
+  }
+}

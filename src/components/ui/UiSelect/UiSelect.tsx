@@ -5,15 +5,16 @@ import Select, {StylesConfig} from "react-select";
 import cn from "clsx";
 import s from './UiSelect.module.scss';
 
-type SelectProps = {
+export interface SelectProps {
     hasValue?: boolean,
+    className?: string,
     isMulti?: boolean,
     options?: any,
     selectProps?: any,
     emotion?: any,
     name?: string
     isSearch?: boolean,
-    onChange?: () => void
+    onChange?: any
 }
 
 const colourStyles: StylesConfig<any> = {

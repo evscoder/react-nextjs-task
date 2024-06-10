@@ -22,9 +22,7 @@ const UiTextarea: FC<TextareaProps> = ({ className, id, ...props}) => {
                 {...props}
                 id={id}
                 className={cn(s['textarea__input'], className)}
-            >
-                {props.value}
-            </textarea>
+            />
         </div>
     );
 };

@@ -2,12 +2,9 @@
 
 import React from 'react';
 import ReactInputMask from 'react-input-mask';
-import UiInput from "@/components/ui/UiInput/UiInput";
-interface InputPhoneProps {
-    placeholder: string
-}
+import UiInput, {InputProps} from "@/components/ui/UiInput/UiInput";
 
-const InputPhone: React.FC<InputPhoneProps> = ({ ...props }) => {
+const InputPhone: React.FC<InputProps> = ({ ...props }) => {
     return (
         <ReactInputMask mask="+7 (999) 999 99 99" {...props}>
             <UiInput type={'tel'} />

@@ -1,20 +1,20 @@
 'use client'
 
 import React from 'react';
-import UiInput from "@/components/ui/UiInput/UiInput";
-import withFieldError from "@/hocs/withFieldError";
+import UiInput, {InputProps} from "@/components/ui/UiInput/UiInput";
+import withFieldError, {WithFieldErrorProps} from "@/hocs/withFieldError";
 import InputPhone from "@/components/ui/InputPhone/InputPhone";
-import UiTextarea from "@/components/ui/UiTextarea/UiTextarea";
-import UiInputFile from "@/components/ui/UiInputFile/UiInputFile";
-import UiCheckbox from "@/components/ui/UiCheckbox/UiCheckbox";
+import UiTextarea, {TextareaProps} from "@/components/ui/UiTextarea/UiTextarea";
+import UiInputFile, {InputFileProps} from "@/components/ui/UiInputFile/UiInputFile";
+import UiCheckbox, {CheckboxProps} from "@/components/ui/UiCheckbox/UiCheckbox";
 import UiButton from "@/components/ui/UiButton/UiButton";
-import UiSelect from "@/components/ui/UiSelect/UiSelect";
-const InputSelect = withFieldError(UiSelect);
-const InputField = withFieldError(UiInput);
-const InputNumber = withFieldError(InputPhone);
-const InputText = withFieldError(UiTextarea);
-const InputFile = withFieldError(UiInputFile);
-const InputCheckbox = withFieldError(UiCheckbox);
+import UiSelect, {SelectProps} from "@/components/ui/UiSelect/UiSelect";
+const InputSelect = withFieldError<SelectProps & WithFieldErrorProps>(UiSelect);
+const InputField = withFieldError<InputProps & WithFieldErrorProps>(UiInput);
+const InputNumber = withFieldError<InputProps & WithFieldErrorProps>(InputPhone);
+const InputText = withFieldError<TextareaProps & WithFieldErrorProps>(UiTextarea);
+const InputFile = withFieldError<InputFileProps & WithFieldErrorProps>(UiInputFile);
+const InputCheckbox = withFieldError<CheckboxProps & WithFieldErrorProps>(UiCheckbox);
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {useDispatch} from "react-redux";
@@ -53,6 +53,7 @@ const SubscriptionForm = () => {
             name: Yup.string().required('Это обязательное поле'),
             email: Yup.string().email("Неккоректно веден адрес").required('Это обязательное поле'),
             country: Yup.string().required('Это обязательное поле'),
+            message: Yup.string().required('Это обязательное поле'),
             terms: Yup.array().required("Terms of service must be checked")
         }),
         onSubmit: (values) => {
@@ -63,14 +64,13 @@ const SubscriptionForm = () => {
     });
 
     return (
-        <form action="#" onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
             <div className={'grid grid-cols-12 gap-x-6 gap-y-8 mb-8'}>
                 <div className={'col-span-12'}>
                     <InputSelect
                         hasError={formik.errors.country}
                         options={stateOptions}
                         name={'country'}
-                        value={formik.values.country}
                         onChange={(option: any) => formik.setFieldValue('country', option.value)}
                     />
                 </div>
@@ -108,19 +108,17 @@ const SubscriptionForm = () => {
                 <div className={'col-span-12'}>
                     <InputText
                         placeholder={'Оставьте пометку к заказу'}
-                        name={'message'}>
+                        name={'message'}
                         hasError={formik.errors.message}
                         value={formik.values.message}
                         onChange={formik.handleChange}
-                        required={true}
-                    </InputText>
+                    />
                 </div>
                 <div className={'col-span-12'}>
                     <InputFile
                         id={'InputFile'}
                         name={'file'}
                         text={'Прикрепите файл'}
-                        required={true}
                     />
                 </div>
             </div>

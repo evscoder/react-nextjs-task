@@ -4,14 +4,14 @@ import styles from './UiInputFile.module.scss';
 import cn from 'clsx';
 import Icon from "@/components/ui/Icon/Icon";
 
-interface Props {
+export interface InputFileProps {
     id: string,
     name: string,
     text: React.ReactNode
     className?: string
 }
 
-const UiInputFile: FC<Props> = ({ id, name, text, className}) => {
+const UiInputFile: FC<InputFileProps> = ({ id, name, text, className}) => {
     const [isResult, setIsResult] = useState<string>('');
     const [showError, setShowError] = useState<boolean>(false);
 

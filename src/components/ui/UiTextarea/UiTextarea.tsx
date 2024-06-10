@@ -11,21 +11,19 @@ export interface TextareaProps {
     required?: boolean,
     disabled?: boolean,
     minLength?: number
-    value?: string
+    onChange: any
+    value: string
 }
 
-const UiTextarea: FC<TextareaProps> = ({ className, id, name, placeholder, required, disabled, value}) => {
+const UiTextarea: FC<TextareaProps> = ({ className, id, ...props}) => {
     return (
         <div className={cn(s['textarea'])}>
             <textarea
+                {...props}
                 id={id}
-                name={name}
                 className={cn(s['textarea__input'], className)}
-                placeholder={placeholder}
-                required={required && false}
-                disabled={disabled && false}
             >
-                {value}
+                {props.value}
             </textarea>
         </div>
     );

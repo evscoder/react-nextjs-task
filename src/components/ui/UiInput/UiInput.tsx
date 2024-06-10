@@ -16,27 +16,16 @@ export interface InputProps {
     maxLength?: number
     value?: string
     readonly?: boolean
-    onClick?: any,
-    props?: any
+    onChange?: any
 }
 
-const UiInput = forwardRef<HTMLInputElement, InputProps>(({className, id, type, name, placeholder, required, disabled, minLength, maxLength, value, readonly, onClick, props}, inputElement) => {
+const UiInput = forwardRef<HTMLInputElement, InputProps>(({className, id, ...props}, inputElement) => {
     return (
         <input
+            {...props}
             ref={inputElement}
             id={id}
-            type={type}
-            name={name}
             className={cn(s.input, className)}
-            placeholder={placeholder}
-            required={required && false}
-            disabled={disabled && false}
-            minLength={minLength}
-            maxLength={maxLength}
-            readOnly={readonly}
-            value={value}
-            onClick={onClick}
-            {...props}
         />
     );
 });

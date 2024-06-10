@@ -21,8 +21,8 @@
       color: var(--gray);
     }
 
-    &.error  {
-      color: var(--red) !important;
+    :global(.error) & {
+      background-color: var(--red-a20);
     }
   }
 }

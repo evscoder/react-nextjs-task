@@ -3,6 +3,7 @@ import imagePath from "@/helper/imagePath";
 import UiButton from "@/components/ui/UiButton/UiButton";
 import s from './Header.module.scss';
 import cn from 'clsx';
+import Link from "next/link";
 
 interface Props {
     secondary?: boolean
@@ -13,9 +14,9 @@ const Header: React.FC<Props> = ({ secondary }) => {
         <header className={s.header}>
             <div className={cn(s.header, 'container')}>
                 <div className={s.header__Row}>
-                    <a className={s.logo} href={'/'}>
+                    <Link className={s.logo} href={'/'}>
                         <img className={s.logoImage} src={imagePath('logo.svg')} width={'130px'} height={'44px'} alt=""/>
-                    </a>
+                    </Link>
                     {!secondary &&
                         <UiButton color={'red'} outline={true} link={true} href={'/subscription'} classNames={s.header__btnRight}>
                             Подключить подписку

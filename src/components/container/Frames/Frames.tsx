@@ -8,20 +8,22 @@ import {AppDispatch, RootState} from "@/store";
 import Frame from "@/components/container/Frames/Frame";
 import {getRequestFrames} from "@/api/frames/getFrames";
 import UiButton from "@/components/ui/UiButton/UiButton";
+import {moreFrames} from "@/redux/framesSlice";
 
 const Frames = memo(() => {
-    const { data, loading, maxPage } = useSelector((state: RootState) => state.framesSlice);
+    const { data, loading, maxPage, initLoading, pageCount } = useSelector((state: RootState) => state.framesSlice);
     const dispatch = useDispatch<AppDispatch>();
-    const [page, setPage] = useState<number>(2);
 
     useEffect(() => {
-        dispatch(getRequestFrames('1'));
+        if (!initLoading) {
+            dispatch(getRequestFrames('1'));
+        }
     }, [dispatch])
 
     const onLoadItems = useCallback(() => {
-        dispatch(getRequestFrames(String(page)));
-        setPage(v => v + 1);
-    }, [dispatch, page]);
+        dispatch(getRequestFrames(String(pageCount)));
+        dispatch(moreFrames(pageCount + 1));
+    }, [dispatch, pageCount]);
 
     return (
         <section className={cn(s.frames, 'section')}>
@@ -36,7 +38,7 @@ const Frames = memo(() => {
                         ))}
                     </div>
                 }
-                {page <= maxPage &&
+                {pageCount <= maxPage &&
                     <UiButton color={'red'} outline={true} block={true} onClick={onLoadItems}>
                         {loading ? 'Загрузка...' : 'Показать еще' }
                     </UiButton>

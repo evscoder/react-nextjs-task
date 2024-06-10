@@ -8,6 +8,8 @@ type Props = {
     loading: boolean | null
     error: string
     maxPage: number
+    initLoading: boolean
+    pageCount: number
 }
 
 const initialState: Props = {
@@ -15,12 +17,17 @@ const initialState: Props = {
     loading: null,
     error: '',
     maxPage: 3,
+    initLoading: false,
+    pageCount: 2
 };
 
 const framesSlice = createSlice({
     name: 'framesSlice',
     initialState: initialState,
     reducers: {
+        moreFrames: ((state, {payload}) => {
+            state.pageCount = payload;
+        })
     },
     extraReducers: builder => {
         builder
@@ -29,11 +36,12 @@ const framesSlice = createSlice({
                 state.error = '';
             })
             .addCase(getRequestFrames.fulfilled, (state, action) => {
-                state.loading = false;
-
                 if (action.payload) {
                     state.data = [...state.data, ...action.payload];
                 }
+
+                state.loading = false;
+                state.initLoading = true;
             })
             .addMatcher(isError, (state, action: PayloadAction<string>) => {
                 state.error = action.payload;
@@ -43,6 +51,7 @@ const framesSlice = createSlice({
 });
 
 export const {
+    moreFrames
 } = framesSlice.actions;
 
 export default framesSlice.reducer;

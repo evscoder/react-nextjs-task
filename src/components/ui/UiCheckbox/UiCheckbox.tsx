@@ -13,24 +13,17 @@ export interface CheckboxProps {
     isChecked?: boolean,
     children: React.ReactNode,
     className?: string
+    onChange?: any
 }
 
 const UiCheckbox: FC<CheckboxProps> = ({ isChecked, children, className,...props }) => {
-    const [checked, setChecked] = useState(!!isChecked);
-    const onChange = () => setChecked(!checked);
-
     return (
         <div className={cn(s.checkbox, className)}>
             <input
+                {...props}
                 className={s.checkbox__input}
                 id={props.id}
                 type={'checkbox'}
-                name={props.name}
-                value={props.value && ''}
-                required={props.required}
-                disabled={props.disabled}
-                checked={checked}
-                onChange={onChange}
             />
             <label htmlFor={props.id} className={s.checkbox__label}>{ children }</label>
         </div>

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const UiError: React.FC<Props> = ({ className, children }) => {
-    return <div className={cn(s.error, className)}>{children}</div>;
+    return <div className={cn(s.error)}>{children}</div>;
 };
 
 export default UiError;

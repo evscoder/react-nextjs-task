@@ -36,3 +36,9 @@
   line-height: 1.2;
   font-weight: 600;
 }
+
+.page-title {
+  font-size: clamp(32px, 5.4vw, 56px);
+  font-weight: 700;
+  margin-bottom: 24px;
+}

@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react';
+import React from 'react';
 import UiInput from "@/components/ui/UiInput/UiInput";
 import withFieldError from "@/hocs/withFieldError";
 import InputPhone from "@/components/ui/InputPhone/InputPhone";
@@ -10,12 +10,16 @@ import UiCheckbox from "@/components/ui/UiCheckbox/UiCheckbox";
 import UiButton from "@/components/ui/UiButton/UiButton";
 import UiSelect from "@/components/ui/UiSelect/UiSelect";
 const InputSelect = withFieldError(UiSelect);
-const InputError = withFieldError(UiInput);
+const InputField = withFieldError(UiInput);
 const InputNumber = withFieldError(InputPhone);
 const InputText = withFieldError(UiTextarea);
 const InputFile = withFieldError(UiInputFile);
+const InputCheckbox = withFieldError(UiCheckbox);
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "@/store";
+import {formSuccess} from "@/redux/sliceSubscribe";
 
 export interface StateOptionsProps {
     readonly value: string;
@@ -33,6 +37,8 @@ export const stateOptions: readonly StateOptionsProps[] = [
 ];
 
 const SubscriptionForm = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -46,25 +52,13 @@ const SubscriptionForm = () => {
         validationSchema: Yup.object({
             name: Yup.string().required('Это обязательное поле'),
             email: Yup.string().email("Неккоректно веден адрес").required('Это обязательное поле'),
-            message: Yup.string().required('Это обязательное поле'),
-            country: Yup.string().required('Это обязательное поле')
-        }).shape({
-            file: Yup.mixed().required('Это обязательное поле')
-                .test('fileFormat', 'Можно загрузить только PDF файл', (value: any) => {
-                    if (value) {
-                        const supportedFormats = ['pdf'];
-                        return supportedFormats.includes(value.name.split('.').pop());
-                    }
-                    return true;
-                })
-                .test('fileSize', 'Файл превышает 3MB', (value: any) => {
-                    if (value) {
-                        return value.size <= 3145728;
-                    }
-                    return true;
-                }),
+            country: Yup.string().required('Это обязательное поле'),
+            terms: Yup.array().required("Terms of service must be checked")
         }),
         onSubmit: (values) => {
+            console.log("form submitted");
+            console.log(values);
+            dispatch(formSuccess(true));
         },
     });
 
@@ -77,11 +71,11 @@ const SubscriptionForm = () => {
                         options={stateOptions}
                         name={'country'}
                         value={formik.values.country}
-                        onChange={formik.handleChange}
+                        onChange={(option: any) => formik.setFieldValue('country', option.value)}
                     />
                 </div>
                 <div className={'col-span-12'}>
-                    <InputError
+                    <InputField
                         type={'text'}
                         placeholder={'Имя'}
                         hasError={formik.errors.name}
@@ -91,7 +85,7 @@ const SubscriptionForm = () => {
                     />
                 </div>
                 <div className={'col-span-12 lg:col-span-6'}>
-                    <InputError
+                    <InputField
                         type={'email'}
                         hasError={formik.errors.email}
                         placeholder={'E-mail'}
@@ -126,17 +120,21 @@ const SubscriptionForm = () => {
                         id={'InputFile'}
                         name={'file'}
                         text={'Прикрепите файл'}
-                        placeholder={'Оставьте пометку к заказу'}
-                        hasError={formik.errors.file}
-                        onChange={formik.handleChange}
                         required={true}
                     />
                 </div>
             </div>
             <div className={'mb-8'}>
-                <UiCheckbox id={'agree'} name={'User_Agree'}>
+                <InputCheckbox
+                    id={'agree'}
+                    hasError={formik.errors.terms}
+                    name="terms"
+                    value="checked"
+                    onChange={formik.handleChange}
+                    required={true}
+                >
                     Даю согласие на обработку своих персональных данных
-                </UiCheckbox>
+                </InputCheckbox>
             </div>
             <UiButton color={'red'} type={'submit'}>Оставить заявку</UiButton>
         </form>

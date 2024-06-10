@@ -1,3 +1,13 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.page-content {
+  flex-grow: 1;
+}
+
 .container {
   max-width: 1230px;
   padding: 0 15px;

@@ -22,7 +22,7 @@ const Footer = () => {
         <footer className={s.footer}>
             <div className="container">
                 <div className={s.footer__row}>
-                    <Link href={'#'}>
+                    <Link href={'/'}>
                         <img src={ImagePath('logo.svg')} alt="#"/>
                     </Link>
                     <button onClick={onTogglePolicy} className={s.copyRight} role={'button'}>

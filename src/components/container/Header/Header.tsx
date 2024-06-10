@@ -13,7 +13,7 @@ const Header: React.FC<Props> = ({ secondary }) => {
         <header className={s.header}>
             <div className={cn(s.header, 'container')}>
                 <div className={s.header__Row}>
-                    <a href={s.logo}>
+                    <a className={s.logo} href={'/'}>
                         <img className={s.logoImage} src={imagePath('logo.svg')} width={'130px'} height={'44px'} alt=""/>
                     </a>
                     {!secondary &&

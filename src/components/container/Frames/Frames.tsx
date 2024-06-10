@@ -1,6 +1,6 @@
 'use client';
 
-import React, {memo, useCallback, useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import cn from "clsx";
 import s from "./Frames.module.scss";
 import {useDispatch, useSelector} from "react-redux";

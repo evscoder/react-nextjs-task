@@ -36,16 +36,13 @@ const UiInputFile: FC<Props> = ({ id, name, text, className}) => {
     return (
         <div className={cn(styles['input-file'], className)}>
             <input className={styles['input-file__input']} type={'file'} id={id} name={name} onChange={onChangeFile}/>
-            {isResult !== '' &&
-                <p className={cn(styles['input-file__text'])}>
-                    {text}
-                    {isResult !== '' && <span>{ isResult }</span>}
-                </p>
-            }
-            {showError &&
-                <p className={cn(styles['input-file__text'], styles['input-file__text--error'])}>Слишком большой файл</p>
-            }
             <label htmlFor={id} aria-label={'Выберите файл'} className={styles['input-file__label']}>
+                {!showError ?
+                    <span className={cn(styles['input-file__text'])}>
+                        {isResult === '' ? 'Прикрепите файл' : isResult}
+                    </span> :
+                    <span className={'error'}>Слишком большой файл</span>
+                }
                 <Icon name={'icon-paper-clip'} width={15}/>
             </label>
         </div>

@@ -54,7 +54,12 @@ const SubscriptionForm = () => {
             email: Yup.string().email("Неккоректно веден адрес").required('Это обязательное поле'),
             country: Yup.string().required('Это обязательное поле'),
             message: Yup.string().required('Это обязательное поле'),
-            terms: Yup.array().required("Terms of service must be checked")
+            number: Yup.string()
+                .test("len", "Неккоректно веден номер", (val = '') => {
+                    return val.replace(/\s|\(|\)|\|-|_+/g, "").length === 12;
+                })
+                .required("Это обязательное поле"),
+            terms: Yup.array().required("Это обязательное поле")
         }),
         onSubmit: (values) => {
             console.log("form submitted");

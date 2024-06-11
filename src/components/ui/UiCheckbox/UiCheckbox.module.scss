@@ -49,6 +49,10 @@
       width: 32px;
       height: 32px;
       background-color: var(--gray2);
+
+      :global(.error) & {
+        background-color: var(--red-a20);
+      }
     }
 
     &::after {

@@ -1,5 +1,5 @@
 'use client';
-import React, {FC, useState} from 'react';
+import React from 'react';
 import styles from './UiInputFile.module.scss';
 import cn from 'clsx';
 import Icon from "@/components/ui/Icon/Icon";
@@ -7,36 +7,18 @@ import Icon from "@/components/ui/Icon/Icon";
 export interface InputFileProps {
     id: string,
     name: string,
-    text: React.ReactNode
-    className?: string
+    className?: string,
+    showError: boolean,
+    isResult: string,
+    onChange: any
 }
 
-const UiInputFile: FC<InputFileProps> = ({ id, name, text, className}) => {
-    const [isResult, setIsResult] = useState<string>('');
-    const [showError, setShowError] = useState<boolean>(false);
-
-    const onChangeFile = (event: any) => {
-        const files = event.target.files[0];
-
-        if (files) {
-            const { size, name } = files;
-
-            setShowError(false);
-
-            if (size >= 33554432) {
-                setShowError(true);
-
-                return;
-            }
-
-            setIsResult(name);
-        }
-    };
+const UiInputFile: React.FC<InputFileProps> = ({ className, showError, isResult, ...props}) => {
 
     return (
         <div className={cn(styles['input-file'], className)}>
-            <input className={styles['input-file__input']} type={'file'} id={id} name={name} onChange={onChangeFile}/>
-            <label htmlFor={id} aria-label={'Выберите файл'} className={styles['input-file__label']}>
+            <input {...props} className={styles['input-file__input']} type={'file'}/>
+            <label htmlFor={props.id} aria-label={'Выберите файл'} className={styles['input-file__label']}>
                 {!showError ?
                     <span className={cn(styles['input-file__text'])}>
                         {isResult === '' ? 'Прикрепите файл' : isResult}

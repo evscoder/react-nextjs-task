@@ -2,4 +2,12 @@
   :global(.select__menu) {
     background-color: var(--gray2);
   }
+
+  :global(.error) & {
+    :global(.select__control) {
+      background-color: var(--red-a20) !important;
+    }
+  }
 }
+
+

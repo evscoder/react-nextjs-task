@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {useState} from 'react';
 import UiInput, {InputProps} from "@/components/ui/UiInput/UiInput";
 import withFieldError, {WithFieldErrorProps} from "@/hocs/withFieldError";
 import InputPhone from "@/components/ui/InputPhone/InputPhone";
@@ -38,6 +38,8 @@ export const stateOptions: readonly StateOptionsProps[] = [
 
 const SubscriptionForm = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const [isResult, setIsResult] = useState<string>('');
+    const [showError, setShowError] = useState<boolean>(false);
 
     const formik = useFormik({
         initialValues: {
@@ -45,18 +47,27 @@ const SubscriptionForm = () => {
             email: "",
             number: "",
             message: "",
-            country: "Москва",
+            country: "",
             terms: "",
             file: ""
         },
         validationSchema: Yup.object({
             name: Yup.string().required('Это обязательное поле'),
             email: Yup.string().email("Неккоректно веден адрес").required('Это обязательное поле'),
-            country: Yup.string().required('Это обязательное поле'),
+            country: Yup.string()
+                .test("len", "Это обязательное поле", (val = '') => {
+                    return val !== '';
+                })
+                .required('Это обязательное поле'),
             message: Yup.string().required('Это обязательное поле'),
             number: Yup.string()
                 .test("len", "Неккоректно веден номер", (val = '') => {
                     return val.replace(/\s|\(|\)|\|-|_+/g, "").length === 12;
+                })
+                .required("Это обязательное поле"),
+            file: Yup.string()
+                .test("len", "Это обязательное поле", (val = '') => {
+                    return val !== '';
                 })
                 .required("Это обязательное поле"),
             terms: Yup.array().required("Это обязательное поле")
@@ -67,6 +78,28 @@ const SubscriptionForm = () => {
             dispatch(formSuccess(true));
         },
     });
+
+    const onChangeFile = (event: any) => {
+        const files = event.target.files[0];
+
+        if (files) {
+            const { size, name } = files;
+
+            setShowError(false);
+
+            if (size >= 33554432) {
+                setShowError(true);
+
+                return;
+            }
+
+            setIsResult(name);
+        }
+
+        console.log(files);
+
+        formik.setFieldValue('file', files)
+    };
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -123,7 +156,10 @@ const SubscriptionForm = () => {
                     <InputFile
                         id={'InputFile'}
                         name={'file'}
-                        text={'Прикрепите файл'}
+                        hasError={formik.errors.file}
+                        isResult={isResult}
+                        showError={showError}
+                        onChange={onChangeFile}
                     />
                 </div>
             </div>

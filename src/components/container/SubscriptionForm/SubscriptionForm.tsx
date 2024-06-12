@@ -106,7 +106,7 @@ const SubscriptionForm = () => {
             <div className={'grid grid-cols-12 gap-x-6 gap-y-8 mb-8'}>
                 <div className={'col-span-12'}>
                     <InputSelect
-                        hasError={formik.errors.country}
+                        hasError={formik.touched.country && formik.errors.country}
                         options={stateOptions}
                         name={'country'}
                         onChange={(option: any) => formik.setFieldValue('country', option.value)}
@@ -116,7 +116,7 @@ const SubscriptionForm = () => {
                     <InputField
                         type={'text'}
                         placeholder={'Имя'}
-                        hasError={formik.errors.name}
+                        hasError={formik.touched.name && formik.errors.name}
                         name={'name'}
                         value={formik.values.name}
                         onChange={formik.handleChange}
@@ -125,29 +125,27 @@ const SubscriptionForm = () => {
                 <div className={'col-span-12 lg:col-span-6'}>
                     <InputField
                         type={'email'}
-                        hasError={formik.errors.email}
+                        hasError={formik.touched.email && formik.errors.email}
                         placeholder={'E-mail'}
                         name={'email'}
                         value={formik.values.email}
                         onChange={formik.handleChange}
-                        required={true}
                     />
                 </div>
                 <div className={'col-span-12 lg:col-span-6'}>
                     <InputNumber
-                        hasError={formik.errors.number}
+                        hasError={formik.touched.number && formik.errors.number}
                         placeholder={'+7 (___) __-__-___'}
                         value={formik.values.number}
                         name={'number'}
                         onChange={formik.handleChange}
-                        required={true}
                     />
                 </div>
                 <div className={'col-span-12'}>
                     <InputText
                         placeholder={'Оставьте пометку к заказу'}
                         name={'message'}
-                        hasError={formik.errors.message}
+                        hasError={formik.touched.message && formik.errors.message}
                         value={formik.values.message}
                         onChange={formik.handleChange}
                     />
@@ -156,7 +154,7 @@ const SubscriptionForm = () => {
                     <InputFile
                         id={'InputFile'}
                         name={'file'}
-                        hasError={formik.errors.file}
+                        hasError={formik.touched.file && formik.errors.file}
                         isResult={isResult}
                         showError={showError}
                         onChange={onChangeFile}
@@ -166,11 +164,10 @@ const SubscriptionForm = () => {
             <div className={'mb-8'}>
                 <InputCheckbox
                     id={'agree'}
-                    hasError={formik.errors.terms}
+                    hasError={formik.touched.terms && formik.errors.terms}
                     name="terms"
                     value="checked"
                     onChange={formik.handleChange}
-                    required={true}
                 >
                     Даю согласие на обработку своих персональных данных
                 </InputCheckbox>

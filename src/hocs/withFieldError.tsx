@@ -5,7 +5,7 @@ import cn from "clsx";
 export interface WithFieldErrorProps {
     className?: string;
     classNameInput?: string;
-    hasError?: string | undefined;
+    hasError?: string | undefined | boolean;
 };
 
 const withFieldError = <T extends WithFieldErrorProps>(Component: React.ComponentType<T & WithFieldErrorProps>) => {
